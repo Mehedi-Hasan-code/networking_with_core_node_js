@@ -1,6 +1,4 @@
 {
-  "type": "module",
-  "scripts": {
-    "debug": "node --watch --inspect-brk buffer.js"
-  }
+  "type": "module"
+  
 }
