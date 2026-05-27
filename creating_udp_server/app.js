@@ -1,12 +1,17 @@
 import dgram from 'node:dgram'; // UDP = user datagram protocol
+import { writeFile } from 'node:fs/promises'
+import { createWriteStream } from 'node:fs'
 
 const socket = dgram.createSocket('udp4')
+const writeStream = createWriteStream('Nums.txt')
 
-socket.on('message', (msg, rinfo) => {
+socket.on('message', async (msg, rinfo) => {
   const message = msg.toString();
-  console.log(`received ${message} from ${rinfo.address}: ${rinfo.port}`)
+  // await writeFile('Nums.txt', message)
+  writeStream.write(message)
+  // console.log(`received from ${rinfo.address}: ${rinfo.port}`)
 
-  socket.send('message received', rinfo.port, rinfo.address)
+  // socket.send('message received from server : ', rinfo.port, rinfo.address)
 })
 
 
